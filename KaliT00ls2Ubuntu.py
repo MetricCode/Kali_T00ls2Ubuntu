@@ -25,7 +25,7 @@ banner = """
 
 
 
-all_tools = ['john-the-ripper','python2','john', 'hydra', 'netcat', 'fcrackzip', 'net-tools', 'wireshark', 'searchsploit', 'metasploit-framework', 'nmap', 'gobuster', 'dirsearch', 'ffuf', 'steghide', 'hash-identifier', 'fcrackzip', 'sqlmap', 'binwalk', 'wpscan', 'whois', 'crackmapexec', 'wafw00f', 'python3-impacket', 'impacket-scripts', 'python2', 'hashid', 'git', 'ghidra', 'gdb', 'freerdp2-dev', 'enum4linux', 'jadx', 'joomscan', 'kerberoast', 'linux-exploit-suggester', 'mongo-tools', 'default-libmysqlclient-dev', 'openssh-client', 'openvpn', 'p7zip', 'pdfcrack', 'libapache2-mod-php', 'python3-pip', 'rdesktop', 'sqlitebrowser', 'tcpdump',]
+all_tools = ['python2','john', 'hydra', 'net-tools', 'wireshark', 'searchsploit', 'metasploit-framework', 'nmap', 'gobuster', 'dirsearch', 'ffuf', 'steghide', 'hash-identifier', 'fcrackzip', 'sqlmap', 'binwalk', 'wpscan', 'whois', 'crackmapexec', 'wafw00f', 'python3-impacket', 'impacket-scripts', 'python2', 'hashid', 'git', 'ghidra', 'gdb', 'freerdp2-dev', 'enum4linux', 'jadx', 'joomscan', 'kerberoast', 'linux-exploit-suggester', 'mongo-tools', 'default-libmysqlclient-dev', 'openssh-client', 'openvpn', 'p7zip', 'pdfcrack', 'libapache2-mod-php', 'python3-pip', 'rdesktop', 'sqlitebrowser', 'tcpdump','hashid']
 snap_tools = ['searchsploit']
 awaiting_install = []
 
