@@ -2,6 +2,13 @@
 ## @Author : M3tr1c_r00t
 KaliT00ls2Ubuntu is a python script which is made for new ubuntu users, to help them install all the default and basic kali linux tools as ubuntu does not come defaultly installed with them.
 
+### Setup...
+For the script to run effectively, you need  to run the following commands on your terminal.
+```
+sudo apt update
+sudo apt install python3
+sudo apt-get -y install python3-pip
+```
 
 ### Installation...
 ```
