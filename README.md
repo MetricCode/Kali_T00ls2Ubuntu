@@ -8,6 +8,10 @@ For the script to run effectively, you need  to run the following commands on yo
 sudo apt update
 sudo apt install python3
 sudo apt-get -y install python3-pip
+sudo pip install termcolor
+```
+if the term color module doesnt install, try this :
+```
 sudo pip3 install termcolor
 ```
 
