@@ -67,6 +67,7 @@ def install_tools():
     for i in remaining_tools:
         print(" ")
         print(colored(f"Installing {i} ...","red"))
+        print(" ")
         os.system(f"sudo apt install {i} -y")
         os.system("sleep 2")
         print(" ")
@@ -82,14 +83,16 @@ def create_banner(banner):
    
 def upgrade_tools():
    want_up = input(colored("Would you like to upgrade your system's tools? (y/n)","red",attrs=["bold"]))
-    if want_up == "y":
-        os.system("sleep 1.5")
-        print(colored("Upating is in progress. This might take a while... :)","green"))
-        os.system("sudo apt upgrade -y")
-    else:
-        print(colored("Exiting the tool installer...","red",attrs=["bold"]))
-        os.system("sleep 1")
-        exit()
+   if want_up == "y":
+       os.system("sleep 1.5")
+       print(" ")
+       print(colored("Upating is in progress. This might take a while... :)","green"))
+       print(" ")
+       os.system("sudo apt upgrade -y")
+   else:
+       print(colored("Exiting the tool installer...","red",attrs=["bold"]))
+       os.system("sleep 1")
+       exit()
 
 
 def main():
@@ -106,7 +109,8 @@ def main():
         print(" ")
         pass
     else:
-        print("Updating the system ...")
+        print(" ")
+        print(colored("Updating the system ...","green",attrs=["bold"]))
         os.system("sleep 2")
         os.system("sudo apt-get update -y")
         print(colored("Updating complete!","green",attrs=["bold"]))
@@ -116,7 +120,9 @@ def main():
         print(" ")
         pass
     else:
-        print("Installing snap ...")
+        print(" ")
+        print(colored("Installing snap ...","red",attrs=["bold"]))
+        print(" ")
         os.system("sleep 2")
         os.system("sudo apt install snapd -y")
         print(colored("Snap has been installed :)","green",attrs=["bold"]))
@@ -128,7 +134,7 @@ def main():
         install_choice = input(colored("Would you like to install the missing tools? (y/n)","green",attrs=["bold"]))
         if install_choice == "y":
             install_tools()
-            upgrade_tools()            
+            upgrade_tools()
         else:
             print(colored("Exiting the tool installer...","red",attrs=["bold"]))
             os.system("sleep 2")
@@ -138,9 +144,9 @@ def main():
         print(colored("Exiting the tool installer...","red",attrs=["bold"]))
         os.system("sleep 1")
         os.system("exit")
-        
 
-# Error Handling....        
+
+# Error Handling....
 try:
     main()
 except KeyboardInterrupt:
