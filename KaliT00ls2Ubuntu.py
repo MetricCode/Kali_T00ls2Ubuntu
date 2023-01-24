@@ -65,11 +65,14 @@ def install_tools():
     remaining_tools = [b for b in awaiting_install if b not in uniq_val]
 
     for i in remaining_tools:
-        print(f"Installing {i} ...")
+        print(" ")
+        print(colored(f"Installing {i} ...","red"))
         os.system(f"sudo apt install {i} -y")
         os.system("sleep 2")
-    print("Finishing up the installation process...")
+        print(" ")
+    print(colored("Finishing up the installation process...","green"))
     os.system("sleep 3 |echo '...' ")
+    print(" ")
     print("And Done! :)")
 
 def create_banner(banner):
