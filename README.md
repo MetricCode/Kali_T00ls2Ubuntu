@@ -6,6 +6,7 @@ KaliT00ls2Ubuntu is a python script which is made for new ubuntu users, to help 
 For the script to run effectively, you need  to run the following commands on your terminal.
 ```
 sudo apt update
+sudo apt install git
 sudo apt install python3
 sudo apt-get -y install python3-pip
 sudo pip install termcolor
