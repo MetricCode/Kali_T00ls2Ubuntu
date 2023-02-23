@@ -119,7 +119,7 @@ def set_wordlists():
     os.system("wget https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Leaked-Databases/rockyou.txt.tar.gz -O /usr/share/wordlists/rockyou.txt.tar.gz")
     os.system("tar -xvf /usr/share/wordlists/rockyou.txt.tar.gz")
     time.sleep(1)
-   print(colored("Done!","green",attrs=['bold'])) 
+    print(colored("Done!","green",attrs=['bold'])) 
 
 
 def main():
