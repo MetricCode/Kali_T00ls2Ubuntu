@@ -26,16 +26,18 @@ banner = """
 
 
 
-all_tools = ['python2','wordlists','hashcat','john', 'hydra', 'net-tools', 'wireshark', 'searchsploit', 'metasploit-framework', 'nmap', 'gobuster', 'dirsearch', 'ffuf', 'steghide', 'hash-identifier', 'fcrackzip', 'sqlmap', 'binwalk', 'wpscan', 'whois', 'crackmapexec', 'wafw00f', 'python3-impacket', 'impacket-scripts', 'python2', 'hashid', 'git', 'ghidra', 'gdb', 'freerdp2-dev', 'enum4linux', 'jadx', 'joomscan', 'kerberoast', 'linux-exploit-suggester', 'mongo-tools', 'default-libmysqlclient-dev', 'openssh-client', 'openvpn', 'p7zip', 'pdfcrack', 'libapache2-mod-php', 'python3-pip', 'rdesktop', 'sqlitebrowser', 'tcpdump','hashid']
-snap_tools = ['searchsploit']
+all_tools = ['vim', 'python2','hashcat','john', 'hydra', 'wireshark', 'nmap', 'gobuster', 'dirsearch', 'ffuf', 'steghide', 'fcrackzip', 'sqlmap', 'binwalk','whois', 'ruby-full', 'wafw00f', 'python2', 'gdb', 'openvpn', 'p7zip', 'pdfcrack',  'rdesktop', 'sqlitebrowser', 'tcpdump','hashid']
+snap_tools = ['searchsploit','metasploit-framework', 'crackmapexec', 'enum4linux','ghidra']
+checked_tools = ['net-tools', 'python3-impacket', 'freerdp2-dev', 'libapache2-mod-php', 'default-libmysqlclient-dev', 'openssh-client']
 awaiting_install = []
+
 
 def check_root():
     if os.getuid() != 0:
         print("Sorry. You need to run this script as root :)")
         sys.exit()
 
-
+     
 def check_tools(all_tools):
     installed = "Installed :)"
     not_installed = "Not Installed!"
@@ -60,7 +62,7 @@ def install_tools():
     else:
         for p in uniq_val:
             print(f"Installing {p}")
-            os.system(f"sudo snap install {p} -y")
+            os.system(f"sudo snap install {p}")
             time.sleep(2)
 
     remaining_tools = [b for b in awaiting_install if b not in uniq_val]
@@ -72,6 +74,14 @@ def install_tools():
         os.system(f"sudo apt install {i} -y")
         time.sleep(2)
         print(" ")
+    for i in checked_tools:
+        print(" ")
+        print(colored(f"Installing {i} ...","red"))
+        print(" ")
+        os.system(f"sudo apt install {i} -y")
+        time.sleep(2)
+        print(" ")
+        
     print(colored("Finishing up the installation process...","green"))
     time.sleep(2)
     print("...")
@@ -97,28 +107,10 @@ def upgrade_tools():
        exit()
 
 def set_wordlists():
-    dirbuster_wordlists = ['apache-user-enum-1.0.txt','apache-user-enum-2.0.txt','directory-list-1.0.txt','directory-list-2.3-big.txt','directory-list-2.3-medium.txt','directory-list-2.3-small.txt','directory-list-lowercase-2.3-big.txt','directory-list-lowercase-2.3-medium.txt','directory-list-lowercase-2.3-small.txt']
-    dns_wordlists = ['bitquark-subdomains-top100000.txt', 'combined_subdomains.txt', 'deepmagic.com-prefixes-top500.txt', 'deepmagic.com-prefixes-top50000.txt', 'dns-Jhaddix.txt', 'fierce-hostlist.txt', 'italian-subdomains.txt', 'namelist.txt', 'shubs-stackoverflow.txt', 'shubs-subdomains.txt', 'sortedcombined-knock-dnsrecon-fierce-reconng.txt', 'subdomains-top1million-110000.txt', 'subdomains-top1million-20000.txt', 'subdomains-top1million-5000.txt', 'tlds.txt']
     print(colored("Setting up your wordlists...","red",attrs=['bold']))
-
-    os.system("mkdir /usr/share/wordlists")
-    os.system("git clone https://github.com/v0re/dirb /usr/share/wordlists/set1")
-    os.system("mv /usr/share/wordlists/set1/wordlists /usr/share/wordlists/dirb")
-    os.system("rm -r /usr/share/wordlists/set1")
-
-    os.system("mkdir /usr/share/wordlists/dirbuster")
-    for i in dirbuster_wordlists:
-        os.system(f"wget https://hackbbs.org/wordlists/dirbuster/{i} -O /usr/share/wordlists/dirbuster/{i}")
-    
-    print(colored("Now setting sub-domain wordlists :)","red",attrs['bold']))
-    os.system("mkdir /usr/share/wordlists/dns")
-    for i in dns_wordlists:
-        os.system(f"wget https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/DNS/{i} -O /usr/share/wordlists/dns/{i}")
-
-    print(colored("Setting up rockyou wordlists...","red",attrs=['bold']))
-    os.system("wget https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/Leaked-Databases/rockyou.txt.tar.gz -O /usr/share/wordlists/rockyou.txt.tar.gz")
-    os.system("tar -xvf /usr/share/wordlists/rockyou.txt.tar.gz")
-    time.sleep(1)
+    os.system("git clone https://github.com/3ndG4me/KaliLists")
+    os.system("mkdir /usr/share/wordlists/")
+    os.system("mv KaliLists/* /usr/share/wordlists/")
     print(colored("Done!","green",attrs=['bold'])) 
 
 
