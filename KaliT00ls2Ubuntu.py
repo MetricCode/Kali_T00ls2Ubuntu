@@ -18,10 +18,14 @@ banner = """
 ├┴┐├─┤│  │ │ │ ││ ││  └─┐ -- │ │├┴┐│ ││││ │ │ │
 ┴ ┴┴ ┴┴─┘┴ ┴ └─┘└─┘┴─┘└─┘    └─┘└─┘└─┘┘└┘ ┴ └─┘
 """
-all_tools = ['plocate','vim', 'python2','hashcat','john', 'hydra', 'wireshark', 'nmap', 'gobuster', 'dirsearch', 'ffuf', 'steghide', 'fcrackzip', 'sqlmap', 'binwalk','whois', 'ruby-full', 'wafw00f', 'python2', 'gdb', 'openvpn', 'p7zip', 'pdfcrack',  'rdesktop', 'sqlitebrowser', 'tcpdump','hashid']
+
+# categorizing the tools according to thier specific installers...
+
+all_tools = ['plocate','vim', 'python2','hashcat','john', 'hydra', 'wireshark', 'nmap', 'gobuster', 'dirsearch', 'ffuf', 'steghide', 'fcrackzip', 'sqlmap', 'binwalk','whois', 'ruby-full', 'wafw00f', 'python2', 'gdb', 'openvpn', 'p7zip', 'pdfcrack',  'rdesktop', 'sqlitebrowser', 'tcpdump','hashid','stegseek','gimp','exiftool','nfs-common','autopsy','mysql-client','redis-cli']
 snap_tools = ['searchsploit','metasploit-framework', 'crackmapexec', 'enum4linux','ghidra']
 checked_tools = ['net-tools', 'python3-impacket', 'freerdp2-dev', 'libapache2-mod-php', 'default-libmysqlclient-dev', 'openssh-client']
 awaiting_install = []
+gem_tools = ['wpscan']
 
 
 def check_root():
@@ -29,12 +33,11 @@ def check_root():
         print("Sorry. You need to run this script as root :)")
         sys.exit()
 
-     
 def check_tools(all_tools):
     installed = "Installed :)"
     not_installed = "Not Installed!"
-    print("Checking your tools...")
-    os.system("sleep 2")
+    print(fade.brazil("Checking your tools..."))
+    # checking if the tools in the all_tools category are installed...
     for i in all_tools:
         new_var = str(i)
         output = subprocess.check_output(f"if [ $(which {i}) ]; then echo '{installed}';else echo '{not_installed}';fi",shell=True)
@@ -43,40 +46,63 @@ def check_tools(all_tools):
         strout = str(finout)
         if strout == not_installed:
             awaiting_install.append(new_var)
-    print("The following tools are not installed: ")
-    time.sleep(2)
-    print(awaiting_install)
+
+    print(fade.brazil("The following tools will be installed: "))
+    c = 0
+    print(fade.purplepink("Via apt..."))
+    for i in awaiting_install:
+        c += 1
+        print(f"{c}). {i}")
+        time.sleep(0.5)
+
+    c = 0
+    print(fade.purplepink("Via snap..."))
+    for i in snap_tools:
+        c += 1
+        print(f"{c}). {i}")
+        time.sleep(0.5)
+
+    c = 0
+    print(fade.purplepink("Via gem..."))
+    for i in gem_tools:
+        c += 1
+        print(f"{c}). {i}")
+        time.sleep(0.5)
+    c = 0
+    print(fade.purplepink("Extras..."))
+    for i in checked_tools:
+        c += 1
+        print(f"{c}). {i}")
+        time.sleep(0.5)
+
+
 
 
 def install_tools():
 
-    # seperating snap tools from the tools awaiting installation list...
-    uniq_val = [y for y in awaiting_install if y in snap_tools]
-    if uniq_val == None:
-        pass
-    else:
-        for p in uniq_val:
-            print(f"Installing {p}")
-            os.system(f"sudo snap install {p}")
-            time.sleep(2)
-
-    # tools to install with apt seperated from the snap tools after being installed...
-    remaining_tools = [b for b in awaiting_install if b not in uniq_val]
-
-    for i in remaining_tools:
-        print(colored(f"\nInstalling {i} ...\n","red"))
+    # installing tools from the all_tools which arent installed...
+    for i in awaiting_install:
+        print(fade.fire(f"Installing {i}"))
         os.system(f"sudo apt install {i} -y")
-        time.sleep(2)
+
+    # installing snap tools...
+    for i in snap_tools:
+        print(fade.fire(f"Installing {i}"))
+        os.system(f"sudo snap install {i}")
 
     # installing this tools without checking if they are installed...
     for i in checked_tools:
-        print(colored(f"\nInstalling {i} ...","red"))
-        os.system(f"\nsudo apt install {i} -y")
+        print(fade.fire(f"Installing {i}"))
+        os.system(f"sudo apt install {i} -y")
         time.sleep(1)
-        
-    print(colored("Finishing up the installation process...","green"))
+
+    # installing gem tools...
+    for i in gem_tools:
+        print(fade.fire(f"Installing {i}"))
+        os.system(f"sudo gem install {i}")
+
+    print(fade.brazil("Finishing up the installation process..."))
     time.sleep(1)
-    print("..."+ "\nAnd Done! :)")
     
 
 def create_banner(banner):
@@ -85,82 +111,82 @@ def create_banner(banner):
 
    
 def upgrade_tools():
-   want_up = input(colored("Would you like to upgrade your system's tools? (y/n)","red",attrs=["bold"]))
-   if want_up == "y":
-       time.sleep(2)
-       print(colored("Upating is in progress. This might take a while... :)","green"))
-       os.system("sudo apt upgrade -y")
-   else:
-       print(colored("Exiting the tool installer...","red",attrs=["bold"]))
-       time.sleep(1)
-       exit()
+    want_up = input(fade.brazil("Would you like to upgrade your system's tools? (y/n)"))
+    if want_up == "y":
+        time.sleep(2)
+        print(fade.fire("Updating..."))
+        os.system("sudo apt upgrade -y")
+    else:
+        print(fade.fire("Exiting the tool installer..."))
+        time.sleep(1)
+        exit()
 
 def set_wordlists():
-    print(colored("Setting up your wordlists...","red",attrs=['bold']))
+    print(fade.fire("\nSetting up your wordlists..."))
     os.system("git clone https://github.com/3ndG4me/KaliLists")
     os.system("mkdir /usr/share/wordlists/")
     os.system("mv KaliLists/* /usr/share/wordlists/")
-    print(colored("Done!","green",attrs=['bold'])) 
-
+    print(fade.fire("\nDone!"))
 
 def main():
     create_banner(banner)
     check_root()
-    my_sys_updater = input(colored("Is your system updated? (y/n)","red",attrs=["bold"]))
+    my_sys_updater = input(print(fade.brazil("Is your system updated? (y/n)")))
     if my_sys_updater == "y":
         pass
     elif my_sys_updater == "n":
-        print(colored("Updating the system ...","green",attrs=["bold"]))
-        time.sleep(2)
+        print(fade.fire("Updating the system ..."))
+        time.sleep(1)
         os.system("sudo apt-get update -y")
-        print(colored("Updating complete!","green",attrs=["bold"]))
+        print(fade.fire("Updating complete!"))
     else:
-        print("Invalid choice")
+        print(fade.fire("Invalid choice"))
+        exit()
     
 
-    checking_snap_installation = input(colored("Do you have snap installed? (y/n)","green",attrs= ["bold"]))
+    checking_snap_installation = input(fade.brazil("Do you have snap installed? (y/n)"))
     if checking_snap_installation == "y":
         pass
     elif checking_snap_installation == "n":
-        print(colored("\nInstalling snap ...","red",attrs=["bold"]))
-        time.sleep(2)
+        print(fade.fire("Installing snap ..."))
+        time.sleep(1)
         os.system("sudo apt install snapd -y")
-        print(colored("Snap has been installed :)","green",attrs=["bold"]))
+        print(fade.fire("Snap installed!",))
     else:
-        print("Invalid choice")
+        print(fade.fire("Invalid choice"))
+        exit()
 
 
-    choice = input(colored("Would you like to check your tools and install missing ones? (y/n)","red",attrs=["bold"]))
+    choice = input(fade.brazil("Would you like to check your tools and install missing ones? (y/n)"))
 
     if choice == "y":
         check_tools(all_tools)
-        install_choice = input(colored("Would you like to install the missing tools? (y/n)","green",attrs=["bold"]))
+        install_choice = input(fade.brazil("Would you like to install the missing tools? (y/n)"))
 
         if install_choice == "y":
             install_tools()
             upgrade_tools()
-            get_wordlists = print(colored("Would you like to set up your wordlists? (y/n)","green",attrs=['bold']))
+            get_wordlists = print(fade.brazil("Would you like to set up your wordlists? (y/n)"))
             if get_wordlists =="y":
                 set_wordlists()
                 time.sleep(1)
-                print(colored("Full setup complete! ","yellow",attrs=['bold']))
-                print(colored("Exiting the tool installer...","red",attrs=["bold"]))
-                time.sleep(2)
-                os.system("exit")
+                print(fade.fire("Full setup complete!"+ "\nExiting the tool installer..."))
+                time.sleep(1)
+                exit()
                 
         else:
-            print(colored("Exiting the tool installer...","red",attrs=["bold"]))
-            time.sleep(2)
-            os.system("exit")
+            print(fade.fire("Exiting the tool installer..."))
+            time.sleep(1)
+            exit()
             
     else:
-        print(colored("Exiting the tool installer...","red",attrs=["bold"]))
-        time.sleep(2)
-        os.system("exit")
+        print(fade.fire("Exiting the tool installer..."))
+        time.sleep(1)
+        exit()
 
 
 # Error Handling....
 try:
     main()
 except KeyboardInterrupt:
-    print(colored("Exiting the tool installer...","blue"))
+    print(fade.fire("Exiting the tool installer..."))
