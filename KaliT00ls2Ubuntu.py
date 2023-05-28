@@ -11,7 +11,6 @@ import fade
 import time
 import sys, traceback
 import subprocess
-from termcolor import colored
 
 banner = """
 ┬┌─┌─┐┬  ┬┌┬┐┌─┐┌─┐┬  ┌─┐    ┬ ┬┌┐ ┬ ┬┌┐┌┌┬┐┬ ┬
