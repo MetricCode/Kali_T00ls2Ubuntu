@@ -9,11 +9,11 @@ sudo apt update
 sudo apt install git
 sudo apt install python3
 sudo apt-get -y install python3-pip
-sudo pip install termcolor
+sudo pip install fade
 ```
-if the term color module doesnt install, try this :
+if the fade module doesnt install, try this :
 ```
-sudo pip3 install termcolor
+sudo pip3 install fade
 ```
 
 ### Installation...
