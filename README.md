@@ -40,7 +40,8 @@ sudo dos2unix /usr/bin/KaliT00ls2Ubuntu
 - Basically, the script first of checks if your system is updated.
 - Afterwards, it confirms whether the snap package is installed on the system. 
 - Next, it checks the tools which are not installed on your system and then installs them. 
-![image](https://github.com/MetricCode/Kali_T00ls2Ubuntu/assets/99975622/07c51a9a-256e-4a15-86de-a39a23f17d9d)
+
+![Screenshot from 2023-05-28 04-52-41](https://github.com/MetricCode/Kali_T00ls2Ubuntu/assets/99975622/95ea35b0-b40e-4691-a696-77726b11433f)
 
 
 #### Feel free to checkout my other repos for awesome content!
